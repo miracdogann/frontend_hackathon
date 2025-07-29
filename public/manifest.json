@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Trendyol AI Assistant",
+  "version": "1.0.0",
+  "description": "AI assistant for Trendyol with chat, review summary, and Q&A features.",
+  "permissions": ["activeTab", "storage", "scripting"],
+  "host_permissions": ["https://www.trendyol.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.trendyol.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "icons": {
+    "16": "assistan.png",
+    "48": "assistan.png",
+    "128": "assistan.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

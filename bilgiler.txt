@@ -1,0 +1,44 @@
+cinsiyet  wg=1 kadın , wg = 2 erkek wg=3 çocuk
+Kategoriler 
+
+
+base url sorgusu  "https://www.trendyol.com/sr?"
+
+https://www.trendyol.com/sr?wc=1030&wg=2  örnek sorgu 
+wc genel olarak kategori kısmını kapsıyor 
+
+&prc= 500 - 600
+Süper Avantajlı Ürün tag=kirmizi_kampanya_urunu
+Çok Avantajlı Ürün   tag=turuncu_kampanya_urunu
+Çok Avantajlı Ürün   tag=sari_kampanya_urunu
+
+
+---Beden Bilgisi ----
+
+XS  vr=size|group-xs
+S vr=size|group-s
+M  vr=size|group-m
+L vr=size|group-l
+XL  vr=size|group-xl
+2XL vr=size|group-2xl
+3XL vr=size|group-3xl
+ 
+eğer birden fazla seçim yapılmış ise 
+vr=size|group-xs_group-l_group-xl_group-3xl
+
+
+
+
+Ayrıca şu analizleri de yaptım 
+wb = marka  ---> marka sorgusu için ancak Aşırı sayıda marka olduğu için kategorilerdeki gibi marka kodlarını yazmadım
+
+ayrıca tüm bu dediklerimi yapmadan trendyolda şöyle bir arama yapınca iphone 16 512 GB
+url kısmı bu şekilde oluyor  https://www.trendyol.com/sr?q=iphone%2016%20512%20GB&qt=iphone%2016%20512%20GB&st=iphone%2016%20512%20GB&os=1 
+
+Benim şimdi yapmak istediğim şu geminiyi aracı olarak kullanarak onu topladığım verilere göre eğitmek istiyorum örneğin kullanıcı kategorilerde bulunmayan bir şey isterse kullanıcı sanki search alanında arama yapıyormuş gibi  url dönsün , 
+
+kullanıcı eğer marka felan isterse yine  kullanıcı sanki search alanında arama yapıyormuş gibi  url dönsün   ,
+
+eğer kullanıcının istediği kategori varsa  kullanıcı ektsra olarak beden ve fiyat aralığı istiyorsa şu urli dönsün https://www.trendyol.com/sr?wc=75&wg=2&vr=size|group-m&prc=450-700 ---> bu url erkek Gömlek m benden 450-700 Tl arası anlamına geliyor 
+
+Eğer Beden Yok Marka İstemişse ve kategoride tutuyorsa şu url i dönsün https://www.trendyol.com/sr?q=Mavi%20Marka%20G%C3%B6mlek%20Erkek&qt=Mavi%20Marka%20G%C3%B6mlek%20Erkek&st=Mavi%20Marka%20G%C3%B6mlek%20Erkek&os=1&prc=750-900
