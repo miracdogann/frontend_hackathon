@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { baseUrl } from "../../baseUrl";
 
-export default function CommentAi() {
+export default function CommentAi({ setActiveComponent }) {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
@@ -13,7 +14,7 @@ export default function CommentAi() {
     setError("");
 
     try {
-      const res = await axios.post("http://localhost:8000/api/analiz", { url });
+      const res = await axios.post(`${baseUrl}/api/analiz`, { url });
       setResponse(res.data);
     } catch (err) {
       setError("Bir hata oluştu: " + err.message);
@@ -23,10 +24,30 @@ export default function CommentAi() {
   };
 
   return (
-    <div className="flex flex-col h-[600px] w-[400px] bg-white dark:bg-gray-900 rounded-xl shadow-xl font-sans overflow-hidden">
-      {/* Başlık */}
-      <div className="flex items-center p-3 bg-orange-500 text-white">
-        <h2 className="text-lg font-semibold">Trendyol Asistan 🤖</h2>
+    <div className="flex flex-col h-[700px] w-[550px] bg-white dark:bg-gray-900 rounded-xl shadow-xl font-sans overflow-hidden transition-opacity duration-300">
+      {/* Başlık ve Butonlar */}
+      <div className="flex items-center justify-between p-3 bg-orange-500 text-white">
+        <h2 className="text-lg font-semibold">Trendyol Asistan</h2>
+        <div className="flex gap-2">
+          <button
+            onClick={() => setActiveComponent("asistan")}
+            className="px-2 py-1 text-sm bg-orange-600 hover:bg-orange-700 rounded text-white"
+          >
+            AiAsistan
+          </button>
+          <button
+            onClick={() => setActiveComponent("soru")}
+            className="px-2 py-1 text-sm bg-orange-600 hover:bg-orange-700 rounded text-white"
+          >
+            Soru-Cevap Ai
+          </button>
+          <button
+            onClick={() => setActiveComponent("yorum")}
+            className="px-2 py-1 text-sm bg-orange-600 hover:bg-orange-700 rounded text-white"
+          >
+            Yorum-Analiz Ai
+          </button>
+        </div>
       </div>
 
       {/* İçerik */}
@@ -49,7 +70,6 @@ export default function CommentAi() {
             <div>
               <strong>Toplam Yorum:</strong> {response.comment_count}
             </div>
-
             <div>
               <strong>Ürün Sayfası:</strong>{" "}
               <a
@@ -61,7 +81,6 @@ export default function CommentAi() {
                 Ürünü Görüntüle
               </a>
             </div>
-
             <div>
               <strong>Hedef URL:</strong>{" "}
               <a
@@ -73,14 +92,12 @@ export default function CommentAi() {
                 Hedef Sayfa
               </a>
             </div>
-
             <div>
               <strong>Yorum Özeti:</strong>
               <p className="mt-1 bg-white dark:bg-gray-700 p-2 rounded-md border text-sm">
                 {response.summary}
               </p>
             </div>
-
             <div>
               <strong>Duygu Dağılımı:</strong>
               <div className="space-y-2 mt-2">
@@ -108,7 +125,6 @@ export default function CommentAi() {
                 )}
               </div>
             </div>
-
             <div>
               <strong>Yorumlar:</strong>
               <div className="mt-2 max-h-40 overflow-y-auto space-y-2">

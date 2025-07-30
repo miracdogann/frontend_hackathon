@@ -3,7 +3,7 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { baseUrl } from "../../baseUrl";
 
-export default function TrendAsistanAi() {
+export default function TrendAsistanAi({ setActiveComponent }) {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]); // Mesaj geçmişi için array
   const [loader, setLoader] = useState(false);
@@ -71,10 +71,30 @@ export default function TrendAsistanAi() {
   };
 
   return (
-    <div className="flex flex-col h-[400px] w-[350px] bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden font-sans">
-      {/* Başlık */}
-      <div className="flex items-center p-3 bg-orange-500 text-white">
+    <div className="flex flex-col h-[700px] w-[550px] bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden font-sans transition-opacity duration-300">
+      {/* Başlık ve Butonlar */}
+      <div className="flex items-center justify-between p-3 bg-orange-500 text-white">
         <h2 className="text-lg font-semibold">Trendyol Asistan</h2>
+        <div className="flex gap-2">
+          <button
+            onClick={() => setActiveComponent("asistan")}
+            className="px-2 py-1 text-sm bg-orange-600 hover:bg-orange-700 rounded text-white"
+          >
+            AiAsistan
+          </button>
+          <button
+            onClick={() => setActiveComponent("soru")}
+            className="px-2 py-1 text-sm bg-orange-600 hover:bg-orange-700 rounded text-white"
+          >
+            Soru-Cevap Ai
+          </button>
+          <button
+            onClick={() => setActiveComponent("yorum")}
+            className="px-2 py-1 text-sm bg-orange-600 hover:bg-orange-700 rounded text-white"
+          >
+            Yorum-Analiz Ai
+          </button>
+        </div>
       </div>
 
       {/* Sohbet Alanı */}
