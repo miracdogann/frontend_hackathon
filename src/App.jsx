@@ -19,7 +19,10 @@ function App() {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
-            <TrendAsistanAi setActiveComponent={setActiveComponent} />
+            <TrendAsistanAi
+              setActiveComponent={setActiveComponent}
+              activeComponent={activeComponent}
+            />
           </motion.div>
         )}
         {activeComponent === "soru" && (
@@ -30,7 +33,10 @@ function App() {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
-            <QnAChat setActiveComponent={setActiveComponent} />
+            <QnAChat
+              setActiveComponent={setActiveComponent}
+              activeComponent={activeComponent}
+            />
           </motion.div>
         )}
         {activeComponent === "yorum" && (
@@ -41,7 +47,10 @@ function App() {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
-            <CommentAi setActiveComponent={setActiveComponent} />
+            <CommentAi
+              setActiveComponent={setActiveComponent}
+              activeComponent={activeComponent}
+            />
           </motion.div>
         )}
       </AnimatePresence>

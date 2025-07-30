@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../baseUrl";
 
-export default function CommentAi({ setActiveComponent }) {
+export default function CommentAi({ setActiveComponent, activeComponent }) {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState("");
 
   const analyzeProduct = async () => {
+    if (!url.startsWith("https://www.trendyol.com/")) {
+      setError(
+        "Lütfen geçerli bir Trendyol URL'si girin (https://www.trendyol.com/ ile başlamalı)."
+      );
+      return;
+    }
     setLoading(true);
     setResponse(null);
     setError("");
@@ -31,19 +37,31 @@ export default function CommentAi({ setActiveComponent }) {
         <div className="flex gap-2">
           <button
             onClick={() => setActiveComponent("asistan")}
-            className="px-2 py-1 text-sm bg-orange-600 hover:bg-orange-700 rounded text-white"
+            className={`px-2 py-1 text-sm rounded text-white ${
+              activeComponent === "asistan"
+                ? "bg-orange-700"
+                : "bg-orange-600 hover:bg-orange-700"
+            }`}
           >
             AiAsistan
           </button>
           <button
             onClick={() => setActiveComponent("soru")}
-            className="px-2 py-1 text-sm bg-orange-600 hover:bg-orange-700 rounded text-white"
+            className={`px-2 py-1 text-sm rounded text-white ${
+              activeComponent === "soru"
+                ? "bg-orange-700"
+                : "bg-orange-600 hover:bg-orange-700"
+            }`}
           >
             Soru-Cevap Ai
           </button>
           <button
             onClick={() => setActiveComponent("yorum")}
-            className="px-2 py-1 text-sm bg-orange-600 hover:bg-orange-700 rounded text-white"
+            className={`px-2 py-1 text-sm rounded text-white ${
+              activeComponent === "yorum"
+                ? "bg-orange-700"
+                : "bg-orange-600 hover:bg-orange-700"
+            }`}
           >
             Yorum-Analiz Ai
           </button>
@@ -56,86 +74,54 @@ export default function CommentAi({ setActiveComponent }) {
         {error && (
           <div className="p-2 bg-red-100 text-red-800 rounded-md">{error}</div>
         )}
-
         {/* Yükleniyor */}
         {loading && (
-          <div className="flex justify-center">
-            <div className="w-6 h-6 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="flex justify-center items-center h-full">
+            <div className="w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+            <span className="ml-2 text-gray-600 dark:text-gray-300">
+              Analiz ediliyor...
+            </span>
           </div>
         )}
-
         {/* Sonuçlar */}
-        {response && (
-          <div className="space-y-3">
-            <div>
-              <strong>Toplam Yorum:</strong> {response.comment_count}
-            </div>
-            <div>
-              <strong>Ürün Sayfası:</strong>{" "}
+        {response && !loading && (
+          <div className="space-y-6">
+            <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md border border-gray-200 dark:border-gray-600">
+              <h3 className="text-md font-semibold text-orange-600 mb-2">
+                Ürün Sayfası
+              </h3>
               <a
                 href={response.product_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 underline break-all"
+                className="text-blue-500 underline break-all hover:text-blue-700 transition-colors"
               >
-                Ürünü Görüntüle
+                {response.product_url}
               </a>
             </div>
-            <div>
-              <strong>Hedef URL:</strong>{" "}
-              <a
-                href={response.target_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 underline break-all"
-              >
-                Hedef Sayfa
-              </a>
+            <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md border border-gray-200 dark:border-gray-600">
+              <h3 className="text-md font-semibold text-orange-600 mb-2">
+                Yorum Özeti
+              </h3>
+              <div
+                className="mt-2 text-gray-700 dark:text-gray-200 leading-relaxed"
+                dangerouslySetInnerHTML={{
+                  __html: response.summary.replace(/\n/g, "<br>"),
+                }}
+              />
             </div>
-            <div>
-              <strong>Yorum Özeti:</strong>
-              <p className="mt-1 bg-white dark:bg-gray-700 p-2 rounded-md border text-sm">
-                {response.summary}
-              </p>
-            </div>
-            <div>
-              <strong>Duygu Dağılımı:</strong>
-              <div className="space-y-2 mt-2">
-                {Object.entries(response.emotion_stats).map(
-                  ([emotion, percent]) => (
-                    <div key={emotion}>
-                      <div className="flex justify-between text-xs font-medium mb-1">
-                        <span>{emotion}</span>
-                        <span>{percent}%</span>
-                      </div>
-                      <div className="w-full h-2 bg-gray-200 rounded-full">
-                        <div
-                          className={`h-2 rounded-full transition-all ${
-                            emotion === "happy"
-                              ? "bg-green-500"
-                              : emotion === "neutral"
-                              ? "bg-yellow-500"
-                              : "bg-red-500"
-                          }`}
-                          style={{ width: `${percent}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
-            <div>
-              <strong>Yorumlar:</strong>
-              <div className="mt-2 max-h-40 overflow-y-auto space-y-2">
-                {response.raw_comments.slice(0, 5).map((item, idx) => (
+            <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md border border-gray-200 dark:border-gray-600">
+              <h3 className="text-md font-semibold text-orange-600 mb-2">
+                Yorumlar
+              </h3>
+              <div className="mt-2 space-y-3 max-h-40 overflow-y-auto">
+                {response.raw_comments.map((comment, idx) => (
                   <div
                     key={idx}
-                    className="bg-white dark:bg-gray-700 border rounded-md p-2 text-sm"
+                    className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md border border-gray-100 dark:border-gray-700"
                   >
-                    <p>{item.text}</p>
-                    <p className="text-xs text-gray-500">
-                      Duygu: {item.emotion}
+                    <p className="text-gray-800 dark:text-gray-100">
+                      {comment}
                     </p>
                   </div>
                 ))}
@@ -150,8 +136,9 @@ export default function CommentAi({ setActiveComponent }) {
         <input
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          placeholder="Ürün URL'sini yapıştırın..."
+          placeholder="https://www.trendyol.com/ ile başlayan ürün linki girin"
           className="text-sm p-2 rounded-lg border w-full bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          disabled={loading}
         />
         <button
           onClick={analyzeProduct}

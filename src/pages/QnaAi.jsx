@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function QnAChat({ setActiveComponent }) {
+export default function QnAChat({ setActiveComponent, activeComponent }) {
   const [url, setUrl] = useState("");
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState([]);
@@ -24,6 +24,18 @@ export default function QnAChat({ setActiveComponent }) {
           id: Date.now(),
           type: "error",
           text: "Lütfen en az bir soru veya URL girin.",
+        },
+      ]);
+      return;
+    }
+
+    if (url.trim() && !url.startsWith("https://www.trendyol.com/")) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now(),
+          type: "error",
+          text: "Lütfen geçerli bir Trendyol URL'si girin (https://www.trendyol.com/ ile başlamalı).",
         },
       ]);
       return;
@@ -54,7 +66,7 @@ export default function QnAChat({ setActiveComponent }) {
         {
           id: Date.now() + 1,
           type: "assistant",
-          text: `❓ ${returnedQuestion}\n\n💬 ${ai_answer}\n\n📊 Veri uzunluğu: ${qa_data_length}`,
+          text: `❓ ${returnedQuestion}\n\n💬 ${ai_answer}\n`,
         },
       ]);
     } catch (err) {
@@ -89,19 +101,31 @@ export default function QnAChat({ setActiveComponent }) {
         <div className="flex gap-2">
           <button
             onClick={() => setActiveComponent("asistan")}
-            className="px-2 py-1 text-sm bg-orange-600 hover:bg-orange-700 rounded text-white"
+            className={`px-2 py-1 text-sm rounded text-white ${
+              activeComponent === "asistan"
+                ? "bg-orange-700"
+                : "bg-orange-600 hover:bg-orange-700"
+            }`}
           >
             AiAsistan
           </button>
           <button
             onClick={() => setActiveComponent("soru")}
-            className="px-2 py-1 text-sm bg-orange-600 hover:bg-orange-700 rounded text-white"
+            className={`px-2 py-1 text-sm rounded text-white ${
+              activeComponent === "soru"
+                ? "bg-orange-700"
+                : "bg-orange-600 hover:bg-orange-700"
+            }`}
           >
             Soru-Cevap Ai
           </button>
           <button
             onClick={() => setActiveComponent("yorum")}
-            className="px-2 py-1 text-sm bg-orange-600 hover:bg-orange-700 rounded text-white"
+            className={`px-2 py-1 text-sm rounded text-white ${
+              activeComponent === "yorum"
+                ? "bg-orange-700"
+                : "bg-orange-600 hover:bg-orange-700"
+            }`}
           >
             Yorum-Analiz Ai
           </button>
@@ -158,6 +182,7 @@ export default function QnAChat({ setActiveComponent }) {
           onChange={(e) => setUrl(e.target.value)}
           placeholder="Ürün URL'sini girin (opsiyonel)"
           className="text-sm p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          disabled={loading}
         />
 
         <textarea
@@ -166,6 +191,7 @@ export default function QnAChat({ setActiveComponent }) {
           onKeyDown={handleKeyDown}
           placeholder="Ürünle ilgili sorunuzu yazın..."
           className="text-sm p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 resize-none h-16"
+          disabled={loading}
         />
 
         <button
