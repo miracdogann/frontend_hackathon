@@ -4,12 +4,16 @@ import TrendAsistanAi from "./pages/TrendAsistanAi";
 import QnAChat from "./pages/QnaAi";
 import CommentAi from "./pages/CommentAi";
 import { motion, AnimatePresence } from "framer-motion";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function App() {
   const [activeComponent, setActiveComponent] = useState("asistan");
-
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div
+      className="bg-white d-flex flex-column"
+      style={{ width: "650px", height: "750px" }}
+    >
       <AnimatePresence mode="wait">
         {activeComponent === "asistan" && (
           <motion.div

@@ -1,26 +1,32 @@
 {
   "manifest_version": 3,
-  "name": "Trendyol AI Assistant",
+  "name": "Trendyol Alışveriş Asistanı",
   "version": "1.0.0",
-  "description": "AI assistant for Trendyol with chat, review summary, and Q&A features.",
-  "permissions": ["activeTab", "storage", "scripting"],
-  "host_permissions": ["https://www.trendyol.com/*"],
-  "content_scripts": [
-    {
-      "matches": ["https://www.trendyol.com/*"],
-      "js": ["content.js"],
-      "css": ["content.css"]
-    }
-  ],
+  "description": "Trendyol sayfasında sağ altta AI asistan!",
   "icons": {
-    "16": "assistan.png",
-    "48": "assistan.png",
-    "128": "assistan.png"
+    "32": "asistan1.png",
+    "64": "asistan1.png",
+    "128": "asistan1.png"
   },
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["https://www.trendyol.com/*"],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html"
-  }
+    "default_title": "Trendyol Asistanı'nı başlat"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.trendyol.com/*"],
+      "js": ["inject.js"],
+      "css": ["assets/asistan-ui.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["inject.js", "asistan-ui.js", "assets/*"],
+      "matches": ["https://www.trendyol.com/*"]
+    }
+  ]
 }

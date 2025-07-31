@@ -1,27 +1,30 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+import { resolve } from 'path';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss(),
-],
-build: {
-    outDir: 'dist',
+    viteStaticCopy({
+      targets: [
+        { src: 'public/manifest.json', dest: '.' },
+        { src: 'public/background.js', dest: '.' },
+        { src: 'public/inject.js', dest: '.' },
+        { src: 'public/asistan1.png', dest: '.' },      ],
+    }),
+  ],
+  build: {
     rollupOptions: {
       input: {
-        main: 'src/main.jsx', // React app entry for content script
-        content: 'src/content/content.js', // Content script
-        background: 'src/background/background.js', // Background script
-        popup: 'src/popup/popup.jsx' // Popup entry
+        'asistan-ui': resolve(__dirname, 'src/asistan-ui.jsx'), // Giriş dosyasını doğru tanımla
       },
       output: {
-        entryFileNames: '[name].js',
-        chunkFileNames: 'chunks/[name].js',
-        assetFileNames: 'assets/[name].[ext]'
-      }
-    }
-  }
-})
+        entryFileNames: '[name].js', // Çıkış dosyasını asistan-ui.js olarak ayarla
+        assetFileNames: 'assets/[name].[ext]', // CSS ve diğer varlıkları assets klasörüne koy
+      },
+    },
+    outDir: 'dist',
+    emptyOutDir: true,
+  },
+});
