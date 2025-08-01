@@ -36,7 +36,7 @@ export default function CommentAi({ setActiveComponent, activeComponent }) {
     setError("");
 
     try {
-      const res = await axios.post(`${baseUrl}/api/analiz`, { url });
+      const res = await axios.post(`${baseUrl}/api/analiz/`, { url });
 
       // Yapay yazma efekti için gecikme ekliyoruz
       setTimeout(() => {
@@ -109,13 +109,15 @@ export default function CommentAi({ setActiveComponent, activeComponent }) {
           role="group"
           aria-label="Asistan seçim butonları"
         >
-          {["asistan", "soru", "yorum"].map((key) => {
+          {["asistan", "soru", "yorum", "kabin"].map((key) => {
             const label =
               key === "asistan"
                 ? "AI Asistan"
                 : key === "soru"
                 ? "Soru-Cevap"
-                : "Yorum-Analiz";
+                : key === "yorum"
+                ? "Yorum-Analiz"
+                : "Kabin Al";
             const active = activeComponent === key;
             return (
               <motion.button

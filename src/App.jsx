@@ -3,6 +3,7 @@ import "./App.css";
 import TrendAsistanAi from "./pages/TrendAsistanAi";
 import QnAChat from "./pages/QnaAi";
 import CommentAi from "./pages/CommentAi";
+import ChatUI from "./pages/ChatUI";
 import { motion, AnimatePresence } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -52,6 +53,20 @@ function App() {
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
             <CommentAi
+              setActiveComponent={setActiveComponent}
+              activeComponent={activeComponent}
+            />
+          </motion.div>
+        )}
+        {activeComponent === "kabin" && (
+          <motion.div
+            key="kabin"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
+            <ChatUI
               setActiveComponent={setActiveComponent}
               activeComponent={activeComponent}
             />

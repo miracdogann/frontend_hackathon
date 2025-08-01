@@ -36,7 +36,7 @@ export default function TrendAsistanAi({
     setIsTyping(true);
 
     try {
-      const response = await axios.post(`${baseUrl}/api/chat`, { message });
+      const response = await axios.post(`${baseUrl}/api/chat/`, { message });
       const { gemini_response, url } = response.data;
 
       // Yapay yazma efekti için gecikme ekliyoruz
@@ -147,13 +147,15 @@ export default function TrendAsistanAi({
           role="group"
           aria-label="Asistan seçim butonları"
         >
-          {["asistan", "soru", "yorum"].map((key) => {
+          {["asistan", "soru", "yorum", "kabin"].map((key) => {
             const label =
               key === "asistan"
                 ? "AI Asistan"
                 : key === "soru"
                 ? "Soru-Cevap"
-                : "Yorum-Analiz";
+                : key === "yorum"
+                ? "Yorum-Analiz"
+                : "Kabin Al";
             const active = activeComponent === key;
             return (
               <motion.button

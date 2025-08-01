@@ -62,7 +62,7 @@ export default function QnAChat({ setActiveComponent, activeComponent }) {
     setIsTyping(true);
 
     try {
-      const res = await axios.post("http://localhost:8000/api/qna", {
+      const res = await axios.post("http://localhost:8000/api/qna/", {
         url,
         question,
       });
@@ -163,13 +163,15 @@ export default function QnAChat({ setActiveComponent, activeComponent }) {
           role="group"
           aria-label="Asistan seçim butonları"
         >
-          {["asistan", "soru", "yorum"].map((key) => {
+          {["asistan", "soru", "yorum", "kabin"].map((key) => {
             const label =
               key === "asistan"
                 ? "AI Asistan"
                 : key === "soru"
                 ? "Soru-Cevap"
-                : "Yorum-Analiz";
+                : key === "yorum"
+                ? "Yorum-Analiz"
+                : "Kabin Al";
             const active = activeComponent === key;
             return (
               <motion.button
