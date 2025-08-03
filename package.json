@@ -8,7 +8,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:web": "cross-env BUILD_TARGET=web vite build",
+    "build:extension": "cross-env BUILD_TARGET=extension vite build"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
