@@ -13,10 +13,7 @@ export default function ChatUI({ setActiveComponent, activeComponent }) {
   const [loading, setLoading] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [instructions, setInstructions] = useState("");
-  const [modelType, setModelType] = useState("");
-  const [gender, setGender] = useState("");
-  const [garmentType, setGarmentType] = useState("");
-  const [style, setStyle] = useState("");
+
   const [error, setError] = useState(null);
   const chatContainerRef = useRef(null);
   const personInputRef = useRef(null);
@@ -67,10 +64,6 @@ export default function ChatUI({ setActiveComponent, activeComponent }) {
     formData.append("person_image", personFile);
     formData.append("cloth_image", clothFile);
     formData.append("instructions", instructions);
-    formData.append("model_type", modelType);
-    formData.append("gender", gender);
-    formData.append("garment_type", garmentType);
-    formData.append("style", style);
 
     try {
       const response = await axios.post(`${baseUrl}/api/tryon/`, formData, {
@@ -94,7 +87,7 @@ export default function ChatUI({ setActiveComponent, activeComponent }) {
           {
             productImage: previewCloth,
             image: base64Image,
-            text: text || "AI tarafından oluşturulan sanal giydirme.",
+            text: "AI tarafından oluşturulan sanal giydirme.",
             id: Date.now(),
           },
         ]);
@@ -508,62 +501,7 @@ export default function ChatUI({ setActiveComponent, activeComponent }) {
             }}
             aria-label="Giydirme talimatı"
           />
-          <div className="d-flex gap-2">
-            <input
-              type="text"
-              value={modelType}
-              onChange={(e) => setModelType(e.target.value)}
-              placeholder="Model (örn: basit)"
-              className="form-control"
-              style={{
-                fontSize: "12px",
-                borderRadius: "12px",
-                padding: "8px",
-              }}
-              aria-label="Model tipi"
-            />
-            <input
-              type="text"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-              placeholder="Cinsiyet (örn: unisex)"
-              className="form-control"
-              style={{
-                fontSize: "12px",
-                borderRadius: "12px",
-                padding: "8px",
-              }}
-              aria-label="Cinsiyet"
-            />
-          </div>
-          <div className="d-flex gap-2">
-            <input
-              type="text"
-              value={garmentType}
-              onChange={(e) => setGarmentType(e.target.value)}
-              placeholder="Giyim türü (örn: tshirt)"
-              className="form-control"
-              style={{
-                fontSize: "12px",
-                borderRadius: "12px",
-                padding: "8px",
-              }}
-              aria-label="Giyim türü"
-            />
-            <input
-              type="text"
-              value={style}
-              onChange={(e) => setStyle(e.target.value)}
-              placeholder="Stil (örn: gündelik)"
-              className="form-control"
-              style={{
-                fontSize: "12px",
-                borderRadius: "12px",
-                padding: "8px",
-              }}
-              aria-label="Stil"
-            />
-          </div>
+
           <motion.button
             type="submit"
             disabled={loading || !personFile || !clothFile}
