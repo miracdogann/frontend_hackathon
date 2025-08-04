@@ -11,7 +11,10 @@ export default defineConfig({
         { src: 'public/manifest.json', dest: '.' },
         { src: 'public/background.js', dest: '.' },
         { src: 'public/inject.js', dest: '.' },
-        { src: 'public/asistan1.png', dest: '.' },      ],
+        { src: 'public/asistan1.png', dest: '.' }, 
+        { src: 'src/assets/*.png', dest: 'assets' },
+  
+         ],
     }),
   ],
   build: {
