@@ -57,8 +57,8 @@ export default function CommentAi({ setActiveComponent, activeComponent }) {
     <div
       className="d-flex flex-column rounded overflow-hidden"
       style={{
-        width: "450px",
-        height: "700px",
+        width: "430px",
+        height: "630px",
         backgroundColor: "#fff",
         fontFamily:
           "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif",

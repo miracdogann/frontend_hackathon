@@ -12,8 +12,8 @@ function App() {
   const [activeComponent, setActiveComponent] = useState("asistan");
   return (
     <div
-      className="bg-white d-flex flex-column justify-content-center align-items-center vh-100 w-100"
-      style={{ width: "650px", height: "750px" }}
+      className="bg-white d-flex flex-column justify-content-center align-items-center"
+      style={{ width: "100%", height: "100%" }}
     >
       <AnimatePresence mode="wait">
         {activeComponent === "asistan" && (

@@ -8,13 +8,16 @@ if (!document.getElementById("trendyol-asistan-root")) {
     position: "fixed",
     bottom: "20px",
     right: "20px",
-    width: "450px",
-    height: "750px",
+    width: "430px",
+    height: "630px",
     zIndex: "99999",
     background: "#ffffff", // Beyaz arka plan, stil çakışmasını önler
     borderRadius: "25px",
     overflow: "hidden",
-    boxShadow: "0 10px 20px rgba(0,0,0,0.3)"
+    boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
+    display: "flex",
+    justifyContent : "center",
+    alignItems : "center",
   });
 
   console.log("Container created, loading asistan-ui.js...");

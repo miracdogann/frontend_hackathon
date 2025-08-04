@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
+import { baseUrl } from "../../baseUrl";
 
 export default function QnAChat({ setActiveComponent, activeComponent }) {
   const [url, setUrl] = useState("");
@@ -62,7 +63,7 @@ export default function QnAChat({ setActiveComponent, activeComponent }) {
     setIsTyping(true);
 
     try {
-      const res = await axios.post("http://localhost:8000/api/qna/", {
+      const res = await axios.post(`${baseUrl}/api/qna/`, {
         url,
         question,
       });
@@ -110,7 +111,7 @@ export default function QnAChat({ setActiveComponent, activeComponent }) {
       className="d-flex flex-column rounded overflow-hidden"
       style={{
         width: "450px",
-        height: "700px",
+        height: "630px",
         backgroundColor: "#fff",
         fontFamily:
           "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif",
