@@ -11,3 +11,4 @@ Eğer uzantı olarak trendyol sayfasında görüntülemek istiyorsanız
 Proje Özeti link  https://github.com/miracdogann/frontend_hackathon/blob/front_sunum__8/projeOzet
 
 
+Video Linki : https://www.youtube.com/watch?v=M5fk-obKajo 
