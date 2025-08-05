@@ -8,5 +8,6 @@ Eğer uzantı olarak trendyol sayfasında görüntülemek istiyorsanız
    3- Paketlenmemiş öge yükle seçeneğine basıp dist klasörü seçilir  ve işlem tamamlanır 
 
 
-Proje Özeti link 
+Proje Özeti link  https://github.com/miracdogann/frontend_hackathon/blob/front_sunum__8/projeOzet
+
 
