@@ -1,0 +1,48 @@
+BTK Akademi Hackathon Projesi: E-Ticaret Siteleri İçin AI Destekli Alışveriş Asistanı
+Projemiz, e-ticaret kullanıcılarının alışveriş deneyimini daha hızlı, akıllı ve kullanıcı dostu hale getirmeyi amaçlamaktadır. Uygulama, yalnızca Trendyol platformuna özgü çalışacak şekilde geliştirilmiş bir tarayıcı uzantısıdır. Diğer sitelerde aktif değildir.
+🔹 Temel 4 Ana Özellik:
+1️⃣ AI Ürün Asistanı
+Kullanıcı, almak istediği ürünü detaylı şekilde belirtir (örneğin: gümüş renkli, 800-1200 TL arası, Casio marka kol saati).
+Gemini destekli AI asistanımız, kullanıcının yazdığı isteğe göre Trendyol üzerinde ürün arama, filtreleme ve yönlendirme işlemlerini otomatik olarak yapar.
+🟢 Kullanıcının manuel olarak yapması gereken işlemleri, tek bir komutla hızlı ve özelleştirilmiş biçimde gerçekleştirir.
+2️⃣ Soru-Cevap AI Asistanı
+Kullanıcı bir ürünle ilgileniyor ancak bazı soruları var:
+•	Kargo firması nedir?
+•	WiFi özelliği var mı?
+•	Ürün kaç dereceye kadar dayanıklı?
+•	Kullanım ömrü ne kadar?
+•	Mavi ışık filtresi var mı?
+•	Boyutları nedir?
+Ancak satıcı geç cevap verebilir ya da hiç dönüş yapmayabilir.
+Bu noktada kullanıcı, ürün linkini ve sorusunu AI asistana gönderir. Asistan, geçmiş yorumları ve ürün detaylarını analiz ederek Gemini destekli şekilde anlamlı ve bilgilendirici bir cevap döner.
+3️⃣ Yorum Analizi AI Asistanı
+Bir ürünü satın almadan önce kullanıcılar genellikle yorumları okumak ister.
+Bu özellik sayesinde, ürünün tüm kullanıcı yorumları analiz edilir ve:
+•	Genel kullanıcı deneyimi
+•	Duygu durumu (olumlu, olumsuz, nötr)
+•	Ürünün öne çıkan artı ve eksi yönleri
+… gibi bilgileri içeren kısa ve öz bir özet rapor kullanıcıya sunulur.
+4️⃣ Kabin (Try-On) AI Asistanı
+Giyilebilir ürünlerde (kıyafet, gözlük vb.) kullanıcı, ürünün kendi üzerinde nasıl duracağını merak edebilir.
+Bu özellik sayesinde kullanıcı:
+•	Kendi fotoğrafını
+•	Beğendiği ürünün görselini
+•	Ve isteğini/metnini
+asistana gönderir.
+Gemini destekli Kabin Asistanı bu görselleri birleştirerek ürünü, kullanıcının üzerinde nasıl duracağını gösteren bir örnek çıktı üretir.
+🧩 Teknik Detaylar
+•	Frontend: React + Vite.js
+•	Backend: Python + Django
+•	Yalnızca Trendyol üzerinde çalışan bir uzantı şeklinde geliştirildi.
+📂 GitHub Bağlantıları
+•	Backend Kaynağı
+•	Frontend Kaynağı
+🌐 Canlı Sürüm ve API'ler
+Not: Canlı versiyon bazı teknik aksaklıklardan dolayı tam çalışmamaktadır. Ancak videoda 4 ana özellik de aktif şekilde sunulmuştur.
+•	Frontend: https://frontendhackathon.vercel.app/
+•	Backend API’leri:
+o	Ürün Asistanı: https://ekin072.pythonanywhere.com/api/chat/
+o	Soru-Cevap Asistanı: https://ekin072.pythonanywhere.com/api/qna/
+o	Yorum Analizi: https://ekin072.pythonanywhere.com/api/analiz/
+o	Kabin Asistanı: https://ekin072.pythonanywhere.com/api/tryon/
+
