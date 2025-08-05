@@ -6,3 +6,7 @@ Eğer uzantı olarak trendyol sayfasında görüntülemek istiyorsanız
    1-kök dizinde   npm run build komutu çalıştırılır ve dist klasörü oluşturulur . 
    2- tarayıcıda (chrome) uzatınları yönet kısmını açıp geliştirici modu aktifleştirilir ,
    3- Paketlenmemiş öge yükle seçeneğine basıp dist klasörü seçilir  ve işlem tamamlanır 
+
+
+Proje Özeti link 
+
